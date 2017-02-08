@@ -14,7 +14,7 @@ class PlaysController < ApplicationController
 
   # GET /plays/new
   def new
-    @play = Play.new
+    @play = current_user.play.build
   end
 
   # GET /plays/1/edit
@@ -24,7 +24,7 @@ class PlaysController < ApplicationController
   # POST /plays
   # POST /plays.json
   def create
-    @play = Play.new(play_params)
+    @play = current_user.play.build(play_params)
 
     respond_to do |format|
       if @play.save
