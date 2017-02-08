@@ -15,16 +15,19 @@ class PlaysController < ApplicationController
   # GET /plays/new
   def new
     @play = current_user.plays.build
+    @categories = Category.all.map { |c| [c.name, c.id] }
   end
 
   # GET /plays/1/edit
   def edit
+    @categories = Category.all.map { |c| [c.name, c.id] }
   end
 
   # POST /plays
   # POST /plays.json
   def create
     @play = current_user.plays.build(play_params)
+    @play.category_id = params[:category_id]
 
     respond_to do |format|
       if @play.save
@@ -41,6 +44,7 @@ class PlaysController < ApplicationController
   # PATCH/PUT /plays/1.json
   def update
     respond_to do |format|
+      @play.category_id = params[:category_id]
       if @play.update(play_params)
         format.html { redirect_to @play, notice: 'Play was successfully updated.' }
         format.json { render :show, status: :ok, location: @play }
@@ -69,6 +73,6 @@ class PlaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def play_params
-      params.require(:play).permit(:title, :description, :director)
+      params.require(:play).permit(:title, :description, :director, :category_id)
     end
 end
