@@ -4,7 +4,12 @@ class PlaysController < ApplicationController
   # GET /plays
   # GET /plays.json
   def index
-    @plays = Play.all
+    if params[:category].blank?
+      @plays = Play.all.order("created_at DESC")
+    else
+      @category_id = Category.find_by(name: params[:category]).id
+      @plays = Play.where(:category_id => @category_id).order("created_at DESC")
+    end
   end
 
   # GET /plays/1
@@ -73,6 +78,6 @@ class PlaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def play_params
-      params.require(:play).permit(:title, :description, :director, :category_id)
+      params.require(:play).permit(:title, :description, :director, :category_id, :play_image)
     end
 end
