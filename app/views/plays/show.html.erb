@@ -1,31 +1,42 @@
 <p id="notice"><%= notice %></p>
-<div class="col-md-6 col-md-offset-3">
-  <p>
-    <h2><strong>Title:</strong>  <%= @play.title %></h2>
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag @play.play_image.url, class: "play-show" %>
+  </div>
 
-  </p>
+<div class="col-md-8">
+  <div class="play-info">
+      <p>
+        <h2 class="play-title"><strong>Title:</strong>  <%= @play.title %></h2>
 
-  <p>
-    <h4><strong>Category: </strong> <%= @play.category.name %></h4>
+      </p>
 
-  </p>
+      <p>
+        <h4 class="play-director"><strong>Category: </strong> <%= @play.category.name %></h4>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @play.description %>
-  </p>
+      </p>
 
-  <p>
-    <strong>Director:</strong>
-    <%= @play.director %>
-  </p>
+      <p class="play-desc">
+        <strong>Description:</strong>
+        <%= @play.description %>
+      </p>
+
+      <p class="play-director">
+        <strong>Director:</strong>
+        <%= @play.director %>
+      </p>
+  </div>
+</div>
 <% if user_signed_in? %>
   <% if @play.user_id == current_user.id %>
-  <%= link_to 'Edit', edit_play_path(@play), class: "btn btn-success btn-block" %>  <br>
-  <%= link_to 'Destroy', play_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-block" %> <br>
+  <di>
+    <%= link_to 'Edit', edit_play_path(@play), class: "btn btn-success" %>  <br>
+    <%= link_to 'Destroy', play_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> <br>
+
+  </di>
 
   <% end %>
-    <%= link_to 'Back', plays_path, class: "btn btn-info btn-block" %>
+    <%= link_to 'Back', plays_path, class: "btn btn-info" %>
 <% end %>
 
 </div>
