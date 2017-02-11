@@ -4,4 +4,12 @@
 
 <div class="form-group">
   <p><%= review.comment %></p>
+
+  <% if user_signed_in? %>
+    <% if review.user_id == current_user.id %>
+      <%= link_to "Edit", edit_play_review_path(review.play, review), class: "btn btn-success btn-xs" %>
+      <%= link_to "Delete", play_review_path(review.play, review), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-xs" %>
+      <%=  %>
+    <% end %>
+  <% end %>
 </div>
