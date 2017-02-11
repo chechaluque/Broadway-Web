@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_play
+  
   def new
 
     @review = Review.new
