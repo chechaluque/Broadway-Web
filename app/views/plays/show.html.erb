@@ -15,6 +15,9 @@
         <h4 class="play-director"><strong>Category: </strong> <%= @play.category.name %></h4>
 
       </p>
+      <h4 class="average-rating">Average Rating</h4>
+      <div class="averge-review-rating" data-score="<%= @average_review %>"></div>
+      <span class="numer-of-reviews"><em>From:</em>  <%= @play.reviews.count %> reviews</span>
 
       <p class="play-desc">
         <strong>Description:</strong>
@@ -51,3 +54,23 @@
 <% end %>
 
 </div>
+
+<script>
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function(){
+      return $(this).attr('data-score')
+    },
+    path: '/assets/'
+  });
+</script>
+
+<script>
+  $('.averge-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function(){
+      return $(this).attr('data-score')
+    }
+  });
+</script>

@@ -1,5 +1,6 @@
 class PlaysController < ApplicationController
   before_action :set_play, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit]
 
   # GET /plays
   # GET /plays.json
@@ -15,6 +16,12 @@ class PlaysController < ApplicationController
   # GET /plays/1
   # GET /plays/1.json
   def show
+    if @play.reviews.blank?
+        @average_review = 0
+      elsif
+        @average_review = @play.reviews.average(:rating).round(2)
+      else
+    end
   end
 
   # GET /plays/new
