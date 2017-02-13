@@ -1,22 +1,28 @@
 
-<div class="col-md-3">
+<div class="col-md-12">
     <h1 class="text-center"><%= params[:category] %></h1>
 
     <% if @plays.count == 0 %>
 
       <h3>There are no plays in this category</h3>
       <% else %>
-        <div class="row">
-          <% @plays.each do |play| %>
-          <div class="col-md-3">
-            <a href="/plays/ <%= play.id %>">
-              <%= image_tag play.play_image.url,  class: "play" %>
-            </a>
+
+      <div class="row">
+        <% @plays.each do |play| %>
+          <div class="col-md-4 portfolio-item">
+                <a href="/plays/ <%= play.id %>">
+                  <%= image_tag play.play_image.url,  class: "play" %>
+                </a>
+              <h3>
+                  <a href="/plays/ <%= play.id %>">
+                    <%= play.title %>
+                  </a>
+              </h3>
+            
           </div>
+
+
+        <% end %>
         </div>
-
     <% end %>
-
-
-  <% end %>
 </div>
